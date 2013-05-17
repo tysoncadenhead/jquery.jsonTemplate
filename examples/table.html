@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery JSONML</title>
+    </head>
+    <body>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="../src/jquery.jsonml.js"></script>
+        <script type="text/javascript">
+        var rows = [{
+            type: 'tr',
+            items: [{
+                type: 'th',
+                content: 'Cell 1 Header'
+            }, {
+                type: 'th',
+                content: 'Cell 2 Header'
+            }, {
+                type: 'th',
+                content: 'Cell 3 Header'
+            }]
+       }];
+
+       for (var i = 0; i < 40; i++) {
+            rows.push({
+                type: 'tr',
+                items: [{
+                    type: 'td',
+                    content: 'Cell 1 for row ' + i 
+                }, {
+                    type: 'td',
+                    content: 'Cell 2 for row ' + i
+                }, {
+                    type: 'td',
+                    content: 'Cell 3 for row ' + i
+                }]
+           });
+       }
+
+        $('body').jsonml(
+            [{
+               type: 'table',
+               border: 1,
+               items: rows
+           }]
+        );
+        </script>
+    </body>
+</html>
