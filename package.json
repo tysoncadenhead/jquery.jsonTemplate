@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "description": "JSON Markup Language Templates for jQuery",
   "main": "server.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/tysoncadenhead/jquery.jsonml.git"
@@ -15,5 +14,8 @@
   "gitHead": "566d54f4a68e096b5c709a2cff1e72a2323d1e40",
   "dependencies": {
     "grunt": "latest"
+  },
+  "devDependencies": {
+    "grunt-contrib-uglify": "~0.2.1"
   }
 }

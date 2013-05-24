@@ -96,7 +96,7 @@
 
             // Self closing tags
             } else {
-                html += '/>';
+                html += ' />';
             }
 
             return html;
@@ -130,8 +130,6 @@
                 return this.addItem(obj);
             }
         };
-        
-        return this.init(obj);
 
     };
 
@@ -147,6 +145,7 @@
         * @param {Object} $el
         */
         this.hasTextNodes = function ($el) {
+
             var hasTextNodes = false;
 
             // Filter through all of the contents of the element
@@ -192,7 +191,9 @@
 
             // Add the attributes
             $($el[0].attributes).each(function () {
-                obj[this.nodeName] = this.nodeValue;
+                if (this.nodeName !== 'type') {
+                    obj[this.nodeName] = this.nodeValue;
+                }
             });
 
             // If there are children elements, get them
@@ -224,15 +225,13 @@
             }
         };
 
-        return this.init($el);
-
     };
 
     $.fn.jsonml = function (obj) {
         if (obj) {
-            $(this).append($.jsonml(obj));
+            $(this).append(new $.jsonml().init(obj));
         } else {
-            return $.encodeJsonML($(this));
+            return new $.encodeJsonML().init($(this));
         }
     };
 
