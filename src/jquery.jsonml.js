@@ -5,7 +5,7 @@
     'use strict';
 
     /**
-    * @class jsonml
+    * @class jQuery.jsonml
     */
     $.jsonml = function (obj) {
 
@@ -37,7 +37,6 @@
         * @param {Object}
         */
         this.addAttribute = function (name, val) {
-
             var html = '', value = '';
 
             if (this.isAttribute(name)) {
@@ -62,10 +61,14 @@
         * @param {Object} obj The json markup object
         */
         this.addItem = function (obj) {
-
             var html;
 
             obj.type = obj.type || 'div';
+
+            // JavaScript Tags
+            if (obj.type === 'text/javascript') {
+                obj.type = 'script';
+            }
 
             // Start the tag
             html = '<' + obj.type;
@@ -76,7 +79,7 @@
             }.bind(this));
 
             // Non-self-closing tags
-            if (obj.items || obj.content) {
+            if (obj.items || obj.content || obj.type === 'script') {
 
                 // Close the start tag
                 html += '>';
@@ -132,8 +135,105 @@
 
     };
 
+    /**
+    * @class jQuery.encodeJsonML
+    */
+    $.encodeJsonML = function ($el) {
+
+        /**
+        * If the element passed in has any direct textNodes under it, return true, otherwise, return false
+        *
+        * @method hasTextNodes
+        * @param {Object} $el
+        */
+        this.hasTextNodes = function ($el) {
+            var hasTextNodes = false;
+
+            // Filter through all of the contents of the element
+            $el.contents().filter(function () {
+
+                // This statement is sort of complex... break it down
+                if (
+
+                    // The parent element should be the same as the element passed into this function
+                    $(this).parent().is($el) &&
+
+                    // The nodeType should be "3", which mean that it is a text nod
+                    this.nodeType == 3 && 
+
+                    // There should be some content in the text node other than whitespace
+                    $(this).text().replace(/ /g, '').length > 1
+
+                ) {
+                    hasTextNodes = true;
+                }
+            });
+
+            return hasTextNodes;
+
+        };
+
+        /**
+        * Gets the element JSON
+        *
+        * @method getItem
+        * @param {Object} $el
+        */
+        this.getItem = function ($el) {
+            var self = this,
+                obj = {
+                    'type': String($el.prop('tagName')).toLowerCase()
+                };
+
+            // We default to div, so no need to keep it in the object
+            if (obj.type === 'div') {
+                delete obj.type;
+            }
+
+            // Add the attributes
+            $($el[0].attributes).each(function () {
+                obj[this.nodeName] = this.nodeValue;
+            });
+
+            // If there are children elements, get them
+            if ($el.children().length && !this.hasTextNodes($el)) {
+                obj.items = [];
+                $el.children().each(function () {
+                    obj.items.push(self.getItem($(this)));
+                });
+
+            // If there is content, get that
+            } else {
+                obj.content = $el.html();
+            }
+
+            return obj;
+        };
+
+        /**
+        * Starts the whole thing
+        *
+        * @method init
+        * @param {Object} $el
+        */
+        this.init = function ($el) {
+            if ($el.length) {
+                return this.getItem($el);
+            } else {
+                return {};
+            }
+        };
+
+        return this.init($el);
+
+    };
+
     $.fn.jsonml = function (obj) {
-        $(this).append($.jsonml(obj));
+        if (obj) {
+            $(this).append($.jsonml(obj));
+        } else {
+            return $.encodeJsonML($(this));
+        }
     };
 
 }(jQuery));

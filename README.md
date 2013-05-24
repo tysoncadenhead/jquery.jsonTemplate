@@ -16,6 +16,8 @@ $('#my-element').jsonml(
 );
 ```
 
+## Writing templates in JSONML
+
 This HTML Markup:
 
 ```
@@ -54,7 +56,18 @@ $('#my-element').jsonml(
 );
 ```
 
+## Converting HTML to JsonML
+
+To convert HTML to JsonML, just call jsonml with no parameters on the element you want the template for.
+
+```
+<h1>Hello World</h1>
+<script type="javascript">
+  var template = $('h1').jsonml();
+  console.log(template); // { type: 'h1', content: 'Hello World' }
+</script>
+```
+
 ## TODO
 
-- Create a method to code HTML back into JSONML
 - Unit Tests to make sure this works

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery JSONML</title>
+    </head>
+    <body>
+        <div class="my-div" data-name="my-secret-div-name">
+            <h1>Hello!</h1>
+            <p>Look in the console to see the <strong>JSONML</strong> version of this template</p>
+            <ul>
+                <li>Here is a <em>list</em></li>
+                <li>We will list things</li>
+                <li>It will be great</li>
+            </ul>
+        </div>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="../src/jquery.jsonml.js"></script>
+        <script type="text/javascript">
+            console.log($('.my-div').jsonml());
+        </script>
+    </body>
+</html>
