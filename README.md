@@ -67,7 +67,3 @@ To convert HTML to JsonML, just call jsonml with no parameters on the element yo
   console.log(template); // { type: 'h1', content: 'Hello World' }
 </script>
 ```
-
-## TODO
-
-- Unit Tests to make sure this works
