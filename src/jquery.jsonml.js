@@ -159,7 +159,7 @@
                     $(this).parent().is($el) &&
 
                     // The nodeType should be "3", which mean that it is a text nod
-                    this.nodeType == 3 && 
+                    this.nodeType === 3 && 
 
                     // There should be some content in the text node other than whitespace
                     $(this).text().replace(/ /g, '').length > 1

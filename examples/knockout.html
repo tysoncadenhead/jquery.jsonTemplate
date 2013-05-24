@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery JSONML</title>
+    </head>
+    <body>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.2.0/knockout-min.js"></script>
+        <script type="text/javascript" src="../src/jquery.jsonml.js"></script>
+
+        <script type="text/javascript">
+        $('body').jsonml(
+            [{
+                items: [{
+                   type: 'p',
+                   items: [{
+                        type: 'label',
+                        content: 'First name:'
+                   }, {
+                        type: 'input',
+                        'data-bind': 'value: firstName'
+                   }]
+                }, {
+                    type: 'p',
+                    items: [{
+                        type: 'label',
+                        content: 'Last Name'
+                    }, {
+                        type: 'input',
+                        'data-bind': 'value: lastName'
+                    }]
+                }, {
+                    type: 'h2',
+                    items: [{
+                        type: 'span',
+                        content: 'Hello, '
+                    }, {
+                        type: 'span',
+                        'data-bind': 'text: fullName'
+                    }, {
+                        type: 'span',
+                        content: ' !'
+                    }]
+                }]
+            }]
+        );
+
+        // Here's my data model
+        var ViewModel = function(first, last) {
+            this.firstName = ko.observable(first);
+            this.lastName = ko.observable(last);
+         
+            this.fullName = ko.computed(function() {
+                // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
+                return this.firstName() + " " + this.lastName();
+            }, this);
+        };
+         
+        ko.applyBindings(new ViewModel("Planet", "Earth")); // This makes Knockout
+        </script>
+    </body>
+</html>
