@@ -1,9 +1,9 @@
-module('Encode JSONML');
+module('Encode jsonTemplate');
 
 test('isAttribute()', function () {
 
-    var jsonml = new $.jsonml();
-    var isAttribute = jsonml.isAttribute;
+    var jsonTemplate = new $.jsonTemplate();
+    var isAttribute = jsonTemplate.isAttribute;
 
     equal(isAttribute('type'), false, 'Type should not be an attribute');
     equal(isAttribute('items'), false, 'Items should not be an attribute');
@@ -13,8 +13,8 @@ test('isAttribute()', function () {
 
 test('addAttribute()', function () {
 
-    var jsonml = new $.jsonml();
-    var addAttribute = jsonml.addAttribute.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var addAttribute = jsonTemplate.addAttribute.bind(jsonTemplate);
 
     equal(addAttribute('data-name', 'myName'), ' data-name="myName"', 'Adds an attribute');
     equal(addAttribute('type', 'div'), '', 'Does not add a non-attribute');
@@ -23,8 +23,8 @@ test('addAttribute()', function () {
 
 test('addItem()', function () {
 
-    var jsonml = new $.jsonml();
-    var addItem = jsonml.addItem.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var addItem = jsonTemplate.addItem.bind(jsonTemplate);
 
     var json = {
         type: 'p',
@@ -38,8 +38,8 @@ test('addItem()', function () {
 
 test('addItem() - Self-closing tag', function () {
 
-    var jsonml = new $.jsonml();
-    var addItem = jsonml.addItem.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var addItem = jsonTemplate.addItem.bind(jsonTemplate);
 
     var json = {
         type: 'hr'
@@ -51,8 +51,8 @@ test('addItem() - Self-closing tag', function () {
 
 test('addItem() - Script tag', function () {
 
-    var jsonml = new $.jsonml();
-    var addItem = jsonml.addItem.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var addItem = jsonTemplate.addItem.bind(jsonTemplate);
 
     var json = {
         type: 'script',
@@ -65,8 +65,8 @@ test('addItem() - Script tag', function () {
 
 test('addItem() - Nested', function () {
 
-    var jsonml = new $.jsonml();
-    var addItem = jsonml.addItem.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var addItem = jsonTemplate.addItem.bind(jsonTemplate);
 
     var json = {
         id: 'test',
@@ -88,8 +88,8 @@ test('addItem() - Nested', function () {
 
 test('addItems()', function () {
 
-    var jsonml = new $.jsonml();
-    var addItems = jsonml.addItems.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var addItems = jsonTemplate.addItems.bind(jsonTemplate);
 
     var json = [{
         content: 'foo',
@@ -104,10 +104,10 @@ test('addItems()', function () {
 
 test('init() - add an array', function () {
 
-    var jsonml = new $.jsonml();
-    var init = jsonml.init.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var init = jsonTemplate.init.bind(jsonTemplate);
 
-    jsonml.addItems = function () {
+    jsonTemplate.addItems = function () {
         ok(true, 'Adds items');
     }
 
@@ -117,10 +117,10 @@ test('init() - add an array', function () {
 
 test('init() - add an item', function () {
 
-    var jsonml = new $.jsonml();
-    var init = jsonml.init.bind(jsonml);
+    var jsonTemplate = new $.jsonTemplate();
+    var init = jsonTemplate.init.bind(jsonTemplate);
 
-    jsonml.addItem = function () {
+    jsonTemplate.addItem = function () {
         ok(true, 'Adds items');
     }
 

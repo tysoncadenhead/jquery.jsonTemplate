@@ -2,7 +2,7 @@ module('Encode HTML');
 
 test('hasTextNodes() - true', function () {
 
-    var jhtml = new $.encodeJsonML();
+    var jhtml = new $.encodeJsonTemplate();
     var hasTextNodes = jhtml.hasTextNodes.bind(jhtml);
 
     var $el = $('<div>Text node <strong>Bold</strong></div>');
@@ -13,7 +13,7 @@ test('hasTextNodes() - true', function () {
 
 test('hasTextNodes() - false', function () {
 
-    var jhtml = new $.encodeJsonML();
+    var jhtml = new $.encodeJsonTemplate();
     var hasTextNodes = jhtml.hasTextNodes.bind(jhtml);
 
     var $el = $('<div><strong>Bold</strong><em>Italic</em></div>');
@@ -24,7 +24,7 @@ test('hasTextNodes() - false', function () {
 
 test('getItem()', function () {
 
-    var jhtml = new $.encodeJsonML();
+    var jhtml = new $.encodeJsonTemplate();
     var getItem = jhtml.getItem.bind(jhtml);
 
     var $el = $('<div id="my-id" class="my-class"><ul><li>Item</li><li>Item</li></ul></div>');
@@ -48,7 +48,7 @@ test('getItem()', function () {
 
 test('getItem() - Multiple elements', function () {
 
-    var jhtml = new $.encodeJsonML();
+    var jhtml = new $.encodeJsonTemplate();
     var getItem = jhtml.getItem.bind(jhtml);
 
     var $el = $('<div>1</div><div>2</div><div>3</div>');
@@ -61,7 +61,7 @@ test('getItem() - Multiple elements', function () {
 
 test('init() - empty element', function () {
 
-    var jhtml = new $.encodeJsonML();
+    var jhtml = new $.encodeJsonTemplate();
     var init = jhtml.init.bind(jhtml);
 
     var $el = $();
@@ -72,7 +72,7 @@ test('init() - empty element', function () {
 
 test('init() - existing element', function () {
 
-    var jhtml = new $.encodeJsonML();
+    var jhtml = new $.encodeJsonTemplate();
     var init = jhtml.init.bind(jhtml);
 
     var $el = $('<div>Hi</div>');

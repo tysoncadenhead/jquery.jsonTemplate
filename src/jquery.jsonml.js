@@ -5,12 +5,12 @@
     'use strict';
 
     /**
-    * @class jQuery.jsonml
+    * @class jQuery.jsonTemplate
     */
-    $.jsonml = function (obj) {
+    $.jsonTemplate = function (obj) {
 
         /**
-        * Tests to see whether something is an attribute or a special type used by JsonML
+        * Tests to see whether something is an attribute or a special type used by JsonTemplate
         *
         * @method isAttribute
         * @param {String} name
@@ -134,9 +134,9 @@
     };
 
     /**
-    * @class jQuery.encodeJsonML
+    * @class jQuery.encodeJsonTemplate
     */
-    $.encodeJsonML = function ($el) {
+    $.encodeJsonTemplate = function ($el) {
 
         /**
         * If the element passed in has any direct textNodes under it, return true, otherwise, return false
@@ -227,11 +227,11 @@
 
     };
 
-    $.fn.jsonml = function (obj) {
+    $.fn.jsonTemplate = function (obj) {
         if (obj) {
-            $(this).append(new $.jsonml().init(obj));
+            $(this).append(new $.jsonTemplate().init(obj));
         } else {
-            return new $.encodeJsonML().init($(this));
+            return new $.encodeJsonTemplate().init($(this));
         }
     };
 
